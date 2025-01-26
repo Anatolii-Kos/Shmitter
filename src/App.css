@@ -63,3 +63,8 @@
   justify-content: space-around;
   margin-bottom: 10px;
 }
+
+.user-stats > div:last-child {
+  cursor: pointer;
+  user-select: none;
+}

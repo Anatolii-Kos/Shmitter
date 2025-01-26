@@ -1,11 +1,11 @@
 import Avatar from "./Avatar.jsx";
 import {useContext} from "react";
 import {Twittercontext} from "../utils/context.js";
-import ResizableFontText from "./ResizableFontText.jsx";
+
 
 
 const Stats = () => {
-    const {user, stats} = useContext(Twittercontext);
+    const {user, stats, changeStatsUp, changeStatsDown} = useContext(Twittercontext);
     return (
         <div className={'user-stats'}>
             <div>
@@ -13,8 +13,26 @@ const Stats = () => {
                 {user.name}
             </div>
             <div className={'stats'}>
-                <ResizableFontText>Followers: {stats.followers}</ResizableFontText>
-                <ResizableFontText>Following: {stats.following}</ResizableFontText>
+                <div
+                   onClick={() => changeStatsUp('followers')}
+                   onContextMenu={(e) => {
+                       e.preventDefault()
+                       changeStatsDown('followers')
+                   }
+                }
+                >
+                    Followers: {stats.followers}
+                </div>
+                <div
+                    onClick={() => changeStatsUp('following')}
+                    onContextMenu={(e) => {
+                        e.preventDefault()
+                        changeStatsDown('following')
+                    }
+                }
+                >
+                    Following: {stats.following}
+                </div>
             </div>
         </div>
     );

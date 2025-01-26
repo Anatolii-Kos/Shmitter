@@ -23,13 +23,33 @@ function App() {
         setUser(prevState => ({...prevState, name: name || prevState.name}));
     }
 
+    const changeStatsUp = field => {
+        setStats((prevValue) => ({
+            ...prevValue,
+            [field]: prevValue[field] < 1000
+                ? prevValue[field] + 1
+                : 0
+        }));
+    };
+
+    const changeStatsDown = field => {
+        setStats((prevValue) => ({
+            ...prevValue,
+            [field]: prevValue[field] > 1
+                ? prevValue[field] - 1
+                : prevValue[field]
+        }));
+    };
+
     return (
         <div className={'app'}>
             <Twittercontext.Provider value={{
                 user,
                 stats,
                 changeAvatar,
-                changeName
+                changeName,
+                changeStatsUp,
+                changeStatsDown
             }}>
                 <Navigation/>
                 <Body/>
