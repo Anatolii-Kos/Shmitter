@@ -1,15 +1,20 @@
 import Avatar from "./Avatar.jsx";
+import {useContext} from "react";
+import {Twittercontext} from "../utils/context.js";
+import ResizableFontText from "./ResizableFontText.jsx";
 
-const Stats = ({user, stats, changeAvatar}) => {
+
+const Stats = () => {
+    const {user, stats} = useContext(Twittercontext);
     return (
         <div className={'user-stats'}>
             <div>
-                <Avatar user={user} changeAvatar={changeAvatar} />
+                <Avatar/>
                 {user.name}
             </div>
             <div className={'stats'}>
-                <div>Followers: {stats.followers}</div>
-                <div>Following: {stats.following}</div>
+                <ResizableFontText>Followers: {stats.followers}</ResizableFontText>
+                <ResizableFontText>Following: {stats.following}</ResizableFontText>
             </div>
         </div>
     );
