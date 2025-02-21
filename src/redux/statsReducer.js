@@ -1,6 +1,11 @@
 import {CHANGE_FOLLOWERS, CHANGE_FOLLOWING,} from "./accountActions.js";
 
-export const statsReducer = (state, action) => {
+const defaultState = {
+    followers: 0,
+    following: 0
+}
+
+export const statsReducer = (state=defaultState, action) => {
     switch (action.type) {
         case CHANGE_FOLLOWERS:
             return{...state, followers: (state.followers + action.payload)<0? 0: (state.followers + action.payload) }
