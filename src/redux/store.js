@@ -1,5 +1,6 @@
-import {accountReducer} from "./accountReducer.js";
+
 import {legacy_createStore} from "redux";
+import {rootReducer} from "./rootReducer.js";
 
 const initialState = {
     user: {
@@ -12,4 +13,4 @@ const initialState = {
     }
 }
 
-export const store = legacy_createStore(accountReducer, initialState);
+export const store = legacy_createStore(rootReducer, initialState);
