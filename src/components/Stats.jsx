@@ -1,40 +1,35 @@
 import Avatar from "./Avatar.jsx";
-import { changeFollowers, changeFollowing } from "../redux/accountActions.js";
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {changeStats} from "../features/stats/statsSlice.js";
 
 const Stats = () => {
-    const user = useSelector(state => state.user) || {}; // Защита от null
-    const stats = useSelector(state => state.stats) || {}; // Защита от null
+    const {followers, following} = useSelector(state => state.stats);
+    const {name} = useSelector(state => state.user);
     const dispatch = useDispatch();
 
-    const { name } = user;
-    const { followers, following } = stats;
-
     return (
-        <div className="user-stats">
+        <div className={'user-stats'}>
             <div>
-                <Avatar />
+                <Avatar/>
                 {name}
             </div>
-            <div className="stats">
+            <div className={'stats'}>
                 <div
-                    onClick={() => dispatch(changeFollowers(1))}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => dispatch(changeStats({statsType:'followers', sum: 1}))}
                     onContextMenu={(e) => {
                         e.preventDefault();
-                        dispatch(changeFollowers(-1));
+                        dispatch(changeStats({statsType:'followers', sum: -1}));
                     }}
-                >
-                    Followers: {followers}
-                </div>
+                >Followers: {followers}</div>
                 <div
-                    onClick={() => dispatch(changeFollowing(1))}
+                    style={{ cursor: "pointer" }}
+                    onClick={() => dispatch(changeStats({statsType:'following',sum: 1}))}
                     onContextMenu={(e) => {
                         e.preventDefault();
-                        dispatch(changeFollowing(-1));
+                        dispatch(changeStats({statsType:'following',sum: -1}));
                     }}
-                >
-                    Following: {following}
-                </div>
+                >Following: {following}</div>
             </div>
         </div>
     );

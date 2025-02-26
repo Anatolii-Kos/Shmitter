@@ -1,11 +1,13 @@
-import {changeAvatar, changeName} from "../redux/accountActions.js";
 import {useDispatch, useSelector} from "react-redux";
+import {changeAvatar, changeName} from "../features/user/userSlice.js";
 
 const Avatar = ({size}) => {
-    const user = useSelector(state => state.user);
+    const {avatar, name} = useSelector(state => state.user);
     const dispatch = useDispatch();
+
     return (
         <img
+            style={{ cursor: "pointer" }}
             onClick={() => {
                 const url = prompt('Enter new avatar url');
                 dispatch(changeAvatar(url));
@@ -16,8 +18,8 @@ const Avatar = ({size}) => {
                 dispatch(changeName(name));
             }}
             className={`user-avatar ${size ?? ''}`}
-            src={user.avatar}
-            alt={user.name}
+            src={avatar}
+            alt={name}
         />
     );
 };
